@@ -23,7 +23,7 @@
 
 \title[Theory of languages]{Introduction to theory of languages}
 \author{Patryk Kiepas}
-\institute{MINES ParisTech \\ AGH University Of Science and Technology \\ THALES}
+\institute{MINES ParisTech \\ AGH University Of Science and Technology}
 
 \date{\today}
 
@@ -333,7 +333,7 @@ is a system $G = (V_T, V_N, P, S)$ where:
 %\item $NT$ -- set of nonterminals
 \item $V_N$ -- nonterminals
 \item $P$ -- production rules
-\item $S$ -- start symbol (one nonterminal)
+\item $S$ -- start symbol, $S\in V_N$
 \end{itemize}
 \end{definition}
 
@@ -342,16 +342,16 @@ is a system $G = (V_T, V_N, P, S)$ where:
 % --------------------------------------------------------------------- %
 \begin{frame}{Grammar and languages}
 
-\begin{block}{Grammar properties}
-\begin{itemize}
-\item $V_N, V_T, P$ -- are finite, nonempty sets
-%\item $\Sigma$ -- usually nonempty (if empty we have an empty language)
-\item $V_N \cap V_T = \emptyset$ -- are disjoint
-\item $V = \Sigma \cup NT$ -- vocabulary (terminals and nonterminals)
-\item $P \subseteq V^{+} \times V^{\ast}$
-\item $S \in NT$
-\end{itemize}
-\end{block}
+\begin{definition}{Grammar}
+	is a system $G = (V_T, V_N, P, S)$ where:
+	\begin{itemize}
+		\item $V_N, V_T, P$ -- are finite, nonempty sets
+		%\item $\Sigma$ -- usually nonempty (if empty we have an empty language)
+		\item $V_N \cap V_T = \emptyset$ -- are disjoint
+		\item $V = V_N \cup V_T$ -- vocabulary (terminals and nonterminals)
+		\item $P \subseteq V^{+} \times V^{\ast}$
+	\end{itemize}
+\end{definition}
 
 \begin{block}{Grammar and languages}
 \begin{itemize}
@@ -717,7 +717,73 @@ A parser generator which allows to:
 	
 \end{frame}
 
-\begin{frame}{ANTLR syntax}
+\begin{frame}[fragile]{ANTLR syntax (I)}
+
+	\begin{minipage}[t]{0.3\textwidth}
+		\begin{exampleblock}{Grammar structure}		
+			\footnotesize
+			\begin{lstlisting}
+				grammar ANY_NAME;
+				options {...}
+				import ... ;
+				tokens {...}
+				channels {...}
+				@actionName{...}
+				// lexer rules
+				LEXER_RULE1
+				LEXER_RULE2
+				// parser rules
+				parser_rule1
+				parser_rule2			
+			\end{lstlisting}
+		\end{exampleblock}
+	\end{minipage}
+	\noindent\hfill
+	\begin{minipage}[t]{0.65\textwidth}
+		\begin{block}{Grammar properties}
+			\begin{itemize}
+				\item Each section can be specified in any order
+				\item Only one definition for sections: \textit{options}, \textit{imports}, \textit{tokens}
+				\item The header and at least one rule are mandatory
+			\end{itemize}
+		\end{block}
+
+			\begin{alertblock}{Reserved keywords}
+				\textit{import, fragment, lexer, parser, grammar, returns, locals, throws, catch, finally, mode, options, tokens}
+			\end{alertblock}
+			
+	\end{minipage}
+		\begin{alertblock}{Grammar file}
+			The file name with grammar \textit{ANY\_NAME} must be called \textit{ANY\_NAME.g4}
+		\end{alertblock}	
+
+\end{frame}
+
+\begin{frame}{Lexer vs parser}
+	
+\begin{figure}
+\includegraphics[width=\textwidth]{img/lexer_parser_scheme}
+\vskip -1.2cm
+\caption{\label{fig:your-figure}Caption goes here\footnotemark}
+\end{figure}
+	
+	
+	
+%	Lexical analysis converts a sequences of characters into a sequence of tokens (strings with meanings).
+	
+%	\begin{block}{Parser}
+%		Performs \textit{lexical analysis} which is classification of sequence of symbols into lexemes (tokens). Single characters are symbols for lexer. Lexer understand regular grammar (Chomsky's level 3).
+%	\end{block}
+	
+	\begin{block}{Lexer}
+		Tokens (terminal symbols with semantics) are symbols for the parser. Parser understands context-free grammar (Chomsky's level 2).
+	\end{block}
+
+\footnotetext[1]{\tiny From ANTLR4 on-line documentation}
+
+\end{frame}
+
+\begin{frame}{ANTLR syntax (II)}
 	\begin{table}[H]
 		\begin{tabular}{c|c}
 			\textbf{Syntax} & \textbf{Description} \\
@@ -747,6 +813,10 @@ A parser generator which allows to:
 			Nested phrase & \verb^expr : '(' expr ')' | ID^
 		\end{tabular}
 	\end{table}
+\end{frame}
+
+\begin{frame}{Action and semantic predicate}
+	
 \end{frame}
 
 \begin{frame}[fragile]{First grammar}
@@ -828,8 +898,31 @@ WS : [ \t]+ -> skip;
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}{Generated parser}
+	zawartość...
+\end{frame}
+
+\begin{frame}{Generated lexer}
+	zawartość...
+\end{frame}
+
+\begin{frame}{Generated tree visitor}
+	zawartość...
+\end{frame}
+
+\begin{frame}{Generated tree listener}
+	zawartość...
+\end{frame}
+
 \begin{frame}{Importing grammars}
 	show two files : lexer \& grammar
+\end{frame}
+
+\begin{frame}{ANTLR caveats}
+	\begin{itemize}
+		\item Lexer/Parser rules order matter
+		\item 
+	\end{itemize}
 \end{frame}
 
 % Commands to include a figure:
