@@ -16,6 +16,10 @@
 
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{listings}
+
 
 \title[Theory of languages]{Introduction to theory of languages}
 \author{Patryk Kiepas}
@@ -24,6 +28,13 @@
 \date{\today}
 
 \begin{document}
+
+\begin{frame}[fragile]
+	\begin{lstlisting}{lang-antlr}
+	grammar G;
+		A: a;
+	\end{lstlisting}
+\end{frame}
 
 % --------------------------------------------------------------------- %
 \begin{frame}
@@ -56,10 +67,11 @@
 \item Grammars and languages
 \item ANTLR
 \end{itemize}
-\item Saturday, 25th of March 2017 -- exercises \& exam (???)
+\item Saturday, 25th of March 2017 -- exercises
 \begin{itemize}
 \item ANTLR
 \end{itemize}
+\item Exam
 \end{enumerate}
 
 \end{frame}
@@ -76,15 +88,16 @@ Ask by mail: \verb|kiepas@agh.edu.pl|
 \end{frame}
 
 % --------------------------------------------------------------------- %
-\begin{frame}{This lecture}
-\begin{itemize}
-\item Linguistics
-\item Languages
-\item Grammar
-\item Hierarchy of grammars
-\item Notations
-\item Automaton
-\end{itemize}
+\begin{frame}{Plan of the lecture}
+	\tableofcontents
+%\begin{itemize}
+%\item Linguistics
+%\item Languages
+%\item Grammar
+%\item Hierarchy of grammars
+%\item Notations
+%\item Automaton
+%\end{itemize}
 \end{frame}
 
 \section{Theory}
@@ -240,11 +253,11 @@ A set $\Sigma$ of available symbols, the simplest elements in the language
 
 \begin{frame}{Word (I)}
 \begin{block}{Word}
-Word $w$ is a sequence of $N$ symbols $w = x_1x_2...x_N$ (e.g. $010110$, $ABCDAAE$)
+Word $w$ is a sequence of $N$ symbols $w = x_1x_2...x_N$ where $x_i\in\Sigma$ \\ (e.g. $010110$, $ABCDAAE$)
 \end{block}
 
 \begin{block}{Length}
-Length of word $w$ is a number of symbols it consists of $|w|=N$ (e.g. $|010110| = 6$, $|ABCDAAE| = 7$)
+Length of word $w$ is a number of symbols it contains $|w|=N$ \\ (e.g. $|010110| = 6$, $|ABCDAAE| = 7$)
 \end{block}
 
 \begin{alertblock}{Empty word}
@@ -285,7 +298,7 @@ Special word $\epsilon$ with length $|\epsilon|=0$
 \begin{frame}{Language}
 	
 \begin{definition}{Formal language}
-$L$ is a set of words over an alphabet $\Sigma$, $L \subseteq \Sigma^{\ast}$
+$L\subseteq\Sigma^{\ast}$ is a subset of all words built over an alphabet $\Sigma$
 \end{definition}
 	
 \begin{exampleblock}{Examples}
@@ -313,12 +326,14 @@ $L$ is a set of words over an alphabet $\Sigma$, $L \subseteq \Sigma^{\ast}$
 \end{block}
 
 \begin{definition}{Grammar}
-is a system $G = (\Sigma, NT, P, S)$ where:
+is a system $G = (V_T, V_N, P, S)$ where:
 \begin{itemize}
-\item $\Sigma$ -- alphabet (set of terminals)
-\item $NT$ -- set of nonterminals
-\item $P$ -- set of production rules
-\item $S$ -- marked nonterminal as \textit{start symbol}
+%\item $\Sigma$ -- alphabet (set of terminals)
+\item $V_T$ -- terminals (alphabet $\Sigma$)
+%\item $NT$ -- set of nonterminals
+\item $V_N$ -- nonterminals
+\item $P$ -- production rules
+\item $S$ -- start symbol (one nonterminal)
 \end{itemize}
 \end{definition}
 
@@ -329,10 +344,11 @@ is a system $G = (\Sigma, NT, P, S)$ where:
 
 \begin{block}{Grammar properties}
 \begin{itemize}
-\item $NT, P$ -- are finite and nonempty
-\item $\Sigma$ -- usually nonempty (if empty we have an empty language)
-\item $\Sigma, NT$ -- are disjoint
-\item $P \subseteq (\Sigma \cup NT)^{+} \times (\Sigma \cup NT)^{\ast}$
+\item $V_N, V_T, P$ -- are finite, nonempty sets
+%\item $\Sigma$ -- usually nonempty (if empty we have an empty language)
+\item $V_N \cap V_T = \emptyset$ -- are disjoint
+\item $V = \Sigma \cup NT$ -- vocabulary (terminals and nonterminals)
+\item $P \subseteq V^{+} \times V^{\ast}$
 \item $S \in NT$
 \end{itemize}
 \end{block}
@@ -345,6 +361,13 @@ is a system $G = (\Sigma, NT, P, S)$ where:
 \end{itemize}
 \end{block}
 
+ \end{frame}
+ 
+ \begin{frame}{Derivations}
+ 	\begin{itemize}
+ 		\item $s \implies s' \implies s'' \implies ... \implies w$
+ 		\item $s \xRightarrow{\ * \ } w$
+ 	\end{itemize}
  \end{frame}
 
 % --------------------------------------------------------------------- %
@@ -372,15 +395,16 @@ is a system $G = (\Sigma, NT, P, S)$ where:
 \item Accept language
 \item Generate language
 \end{itemize}
-\item $\alpha, \beta$ -- any sequence of terminals and nonterminals
-\item $\gamma$ -- any nonempty sequence of terminals and nonterminals
-\item $A, B$ -- nonterminals
+\item $\alpha, \beta\in V^{*}$ -- any sequence of terminals and nonterminals
+\item $\gamma\in V^{+}$ -- any nonempty sequence of terminals and nonterminals
+\item $A, B\in NT$ -- nonterminals
+\item $a, b\in \Sigma$ -- terminals
 \end{itemize}
 \end{block}
-
+\vskip -0.5cm
 \begin{table}\footnotesize
 \begin{tabular}{c|c|c|c}
-Grammar & Language & Automaton & Production rules \\
+\textbf{Grammar} & \textbf{Language} & \textbf{Automaton} & \textbf{Production rules} \\
 \hline
 Type-0 & Recursively enumerable & Turing machine &  $\alpha \rightarrow \beta$ \\ %Turing machine 
 Type-1 & Context-sensitive & Linear bounded ND TM &$\alpha A\beta \rightarrow \alpha \gamma \beta$ \\ 
@@ -397,21 +421,155 @@ Type-3 & Regular & Finite state &$A\rightarrow a$ and $A\rightarrow aB$
 \end{frame}
 
 % --------------------------------------------------------------------- %
-%\begin{frame}{Limiting condition}
+\begin{frame}{Limiting condition}
 
-%\begin{block}{First condition}
-%Production rules can't decrease length of word. $\forall (\alpha \rightarrow \beta)\in P : |\alpha| \leq |\beta|$
-%\end{block}
+For all production rules $\forall (\alpha \rightarrow \beta)\in P$ it is true:
 
-%\begin{block}{Second condition}
+\begin{block}{First condition}
+	\begin{itemize}
+		\item $|\alpha| \leq |\beta|$ - they don't decrease length of a word
+	\end{itemize}
 
-%\end{block}
+\end{block}
 
-%\begin{block}{Third condition}
+\begin{block}{Second condition}
+	\begin{itemize}
+		\item $\alpha\in V_N$ is a nonterminal
+		\item $\beta\in V^{+}$ is not empty
+	\end{itemize}
+\end{block}
 
-%\end{block}
+\begin{block}{Third condition}
+	\begin{itemize}
+		\item $\alpha\in V_N$ is a nonterminal
+		\item $\beta$ has a form $\beta=a$ or $\beta=aB$ where $a\in V_T, B\in V_N$
+	\end{itemize}
+\end{block}
 
-%\end{frame}
+\end{frame}
+
+\begin{frame}{Grammar examples}
+	\begin{block}{Grammar}
+		Let $G = (V_N, V_T, P, S)$, where 
+		\begin{itemize}
+			\item $V_N = \{S\}$
+			\item $V_T = \{a,b\}$
+			\item $P = \{\textcolor{red}{S \rightarrow aS} \lor \textcolor{blue}{S \rightarrow Sa}, S \rightarrow b\}$
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Derivations}
+		$\textcolor{red}{S}\implies a\textcolor{red}{S}\implies aa\textcolor{red}{S} \implies aaa\textcolor{red}{S} \implies aaaa\textcolor{red}{S} \implies aaaaa\textcolor{red}{S} \implies ...$
+		\\ $\textcolor{blue}{S}\implies \textcolor{blue}{S}a\implies \textcolor{blue}{S}aa \implies \textcolor{blue}{S}aaa \implies \textcolor{blue}{S}aaaa \implies \textcolor{blue}{S}aaaaa \implies ...$
+	\end{block}
+	
+	\begin{block}{Language}
+		$L(G) = \{a^{n}b\}$, where $n \geq 0$
+	\end{block}
+	
+	\begin{exampleblock}{Example sentences}
+		$b, ab, aab, aaab, aaaab, aaaaab, aaaaaab, aaaaaaab, aaaaaaaab, ...$
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Grammar example: \textit{mirror language}}
+	\begin{block}{Grammar}
+		Let $G = (V_N, V_T, P, S)$, where 
+		\begin{itemize}
+			\item $V_N = \{S\}$
+			\item $V_T = \{a,b\}$
+			\item $P = \{S \rightarrow aSa, S \rightarrow bSb, S \rightarrow aa, S \rightarrow bb\}$
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Derivations}
+		$\textcolor{red}{S}\implies a\textcolor{red}{S}a \implies ab\textcolor{red}{S}ba \implies abb\textcolor{red}{S}bbs \implies abba\textcolor{red}{S}abba \implies ...$
+	\end{block}
+	
+	\begin{block}{Language}
+		$L(G) = \{ww^R\}$, where $w^R$ represents reflection of $w$, and $|w|\geq1$. This language $L(G)$ is called a \textit{mirror language}.
+	\end{block}
+	
+	\begin{exampleblock}{Example sentences}
+		$aa, bb, aaaa, abba, baab, bbbb, abaaba, baaaab, abbbba, babbab, aaaaaa...$
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Grammar example}
+	\begin{block}{Grammar}
+		Let $G = (V_N, V_T, P, S)$, where 
+		\begin{itemize}
+			\item $V_N = \{S, E, F\}$
+			\item $V_T = \{a,b,c,d\}$
+			\item $P = \{S \rightarrow ESF, S \rightarrow EF, E \rightarrow ab, F \rightarrow cd\}$
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Derivations}
+		\small$\textcolor{red}{S} \implies E\textcolor{red}{S}F \implies EE\textcolor{red}{S}FF \implies EEE\textcolor{red}{S}FFF \implies E^{n-1}\textcolor{red}{S}F^{n-1} \implies E^nF^n$
+	\end{block}
+	
+	\begin{block}{Language}
+		$L(G) = \{(ab)^n(cd)^n\}$, where $n\geq 1$.
+	\end{block}
+	
+	\begin{exampleblock}{Example sentences}
+		$abcd, ababcdcd, abababcdcdcd, ababababcdcdcdcd, ...$
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Grammar example}
+	\begin{block}{Grammar}
+		Let $G = (V_N, V_T, P, S)$, where 
+		\begin{itemize}
+			\item \small$V_N = \{S, E, F\}$
+			\item \small$V_T = \{a,b,c,d\}$
+			\item \small$P = \{S \rightarrow ESF, S \rightarrow abcd, Ea \rightarrow aE, dF \rightarrow Fd, Eb \rightarrow abb, cF \rightarrow ccd\}$\normalsize
+		\end{itemize}
+	\end{block}
+	% mark red active symbols !!
+	\begin{block}{Derivations}
+		\footnotesize$\textcolor{red}{S} \implies E\textcolor{red}{S}F \implies \textcolor{red}{Ea}bcdF \implies aEbc\textcolor{red}{dF} \implies a\textcolor{red}{Eb}cFd \implies aabbc\textcolor{red}{Fd} \implies aabbccdd$ 
+	\end{block}
+	
+	\begin{block}{Language}
+		$L(G) = \{a^nb^nc^nd^n\}$, where $n \geq 2$.
+	\end{block}
+	
+	\begin{exampleblock}{Sentences}
+		$aabbccdd, aaabbbcccddd, aaaabbbbccccdddd, aaaaabbbbbcccccddddd, ...$
+	\end{exampleblock}
+	
+\end{frame}
+
+\begin{frame}{Grammar example -- regular}
+	
+	\begin{block}{Grammar}
+		Let $G = (V_N, V_T, P, S)$, where 
+		\begin{itemize}
+			\item $V_N = \{S, B\}$
+			\item $V_T = \{a,b\}$
+			\item $P = \{S \rightarrow aB, B \rightarrow bS, B \rightarrow b\}$
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Derivation}
+		$\textcolor{red}{S} \implies a\textcolor{red}{B} \implies ab\textcolor{red}{S} \implies aba\textcolor{red}{B} \implies abab\textcolor{red}{S} \implies ababa\textcolor{red}{B} \implies ...$
+	\end{block}
+	
+	\begin{block}{Language}
+		$L(G) = \{(ab)^n\}$, where $n\geq 1$.
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}{Derivation trees}
+	Also : tree diagrams, phrase markers. For regular and context-free grammars.
+\end{frame}
+
+\begin{frame}{Chomsky's Normal Form}
+	
+\end{frame}
 
 % --------------------------------------------------------------------- %
 %\begin{frame}{Type-0: Unrestricted grammar}
@@ -429,7 +587,15 @@ Type-3 & Regular & Finite state &$A\rightarrow a$ and $A\rightarrow aB$
 %\begin{frame}{Type-3: Regular grammar}
 %\end{frame}
 
-\subsection{Notation}
+%\subsection{Notation}
+\begin{frame}{Language and grammar}
+Two common tasks:
+
+\begin{itemize}
+	\item Check if language is legal (accepted by the grammar) -- trace all the applicable rules (derive it language from the start symbol) or... use corresponding automaton!
+	\item Generate language from grammar -- start from \textit{start symbol}, go through all applicable rules
+\end{itemize}
+\end{frame}
 
 % --------------------------------------------------------------------- %
 \begin{frame}[fragile]{Backus-Naur form (BNF)}
@@ -526,9 +692,145 @@ hannah
 
 \subsection{Tools}
 
+\section{ANTLR}
+
 % --------------------------------------------------------------------- %
-%\begin{frame}{ANTLR}
-%\end{frame}
+\begin{frame}{ANTLR v4}
+	
+\begin{block}{Parser generator}
+	content...
+\end{block}	
+	
+\begin{block}{ANTLR}
+A parser generator which allows to:
+\begin{itemize}
+	\item 
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Usages}
+	\begin{itemize}
+		\item Twitter search queries are parsed using ANTLR
+		\item Lex Machina\footnote{lexmachina.com} extracts informations from legal texts using ANTLR
+	\end{itemize}
+\end{exampleblock}
+	
+\end{frame}
+
+\begin{frame}{ANTLR syntax}
+	\begin{table}[H]
+		\begin{tabular}{c|c}
+			\textbf{Syntax} & \textbf{Description} \\
+			\hline
+			$x$ & Match token, rule or subrule $x$ \\
+			$x y ....z$ & Match a sequence of elements \\
+			$(...|...|...)$ & Sub-rule with multiple alternatives \\
+			$x?$ & Match $x$ or skip it \\
+			$x*$ & Match $x$ zero or more times \\
+			$x+$ & Match $x$ one or more times \\
+			$r: ...$ & Define rule $r$ \\
+			$r: (...|...|...)$ & Define rule $r$ with multiple alternatives
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}[fragile]{ANTLR patterns}
+	\begin{table}[H]
+		\begin{tabular}{c|c}
+			\textbf{Pattern name} & \textbf{Examples} \\
+			\hline
+			Sequence & \verb|'[' INT+ ']'|\\
+			Sequence with terminator & \verb|(statement ';')*| \\
+			Sequence with separator & \verb|( expr (',' expr)*)?| \\
+			Choice & \verb^type : 'int' | 'float'^\\
+			Token dependency & \verb|ID '[' expr ']'| \\
+			Nested phrase & \verb^expr : '(' expr ')' | ID^
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}[fragile]{First grammar}
+	\begin{exampleblock}{Simple grammar (Hello.g4)}
+		\begin{verbatim}
+// define a grammar called Hello
+grammar Hello;
+// match lower-case identifiers
+ID : [a-z]+;
+// skip spaces, tabs, newlines, \r (Windows)
+WS : [ \t\r\n]+ -> skip;
+// match keyword hello followed by an identifier
+r : 'hello' ID;
+		\end{verbatim}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Nested arrays}
+	
+	\begin{exampleblock}{Nested arrays grammar (ArrayInit.g4)}
+		\begin{verbatim}
+			grammar ArrayInit;
+			// matches at least one comma-separated value between {...}
+			init : '{' value (',' value)* '}';
+			// A value can be either a nested array or an integer (INT)
+			value : init | INT;
+			// define token INT as one or more digits
+			INT : [0-9]+;
+			WS : [ \t\r\n]+ -> skip;
+		\end{verbatim}
+	\end{exampleblock}
+				// parser rules start with lowercase letters, lexer rules with uppercase
+\end{frame}
+
+% TODO: use package listings
+\begin{frame}[fragile]{Parser tester}
+	\footnotesize\begin{verbatim}
+		import org.antlr.v4.runtime.*;
+		import org.antlr.v4.runtime.tree.*;
+		
+		public class Test { 
+		    public static void main(String[] args) throws Exception { 
+		        // create a CharStream that reads from standard input 
+		        ANTLRInputStream input = new ANTLRInputStream(System.in);
+		        // create a lexer that feeds off of input 
+		        CharStream ArrayInitLexer lexer = new ArrayInitLexer(input);
+		        // create a buffer of tokens pulled from the lexer 
+		        CommonTokenStream tokens = new CommonTokenStream(lexer);
+		        // create a parser that feeds off the tokens buffer 
+		        ArrayInitParser parser = new ArrayInitParser(tokens);
+		        ParseTree tree = parser.init();
+		        System.out.println(tree.toStringTree(parser));
+		    } 
+		}
+		
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Calculator}
+\footnotesize\begin{lstlisting}
+grammar Expr;
+
+prog: stat+;
+stat: expr NEWLINE
+    | ID '=' expr NEWLINE
+    | NEWLINE;
+
+expr: expr ('*'|'/') expr
+    | expr ('+'|'-') expr
+    | INT
+    | ID
+    | '(' expr ')';
+
+ID : [a-zA-Z]+;
+INT : [0-9]+;
+// return newlines to parser (is end-statement signal)
+NEWLINE:'\r'? '\n';
+WS : [ \t]+ -> skip;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Importing grammars}
+	show two files : lexer \& grammar
+\end{frame}
 
 % Commands to include a figure:
 %\begin{figure}
