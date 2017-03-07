@@ -50,54 +50,40 @@
 
 \begin{document}
 
-
 % --------------------------------------------------------------------- %
+
 \begin{frame}
   \titlepage
 \end{frame}
 
-\section{Introduction}
+\section{Course information}
 
 % --------------------------------------------------------------------- %
-\begin{frame}{Course plan}
 
-\begin{enumerate}
-\item Saturday, 25th of February 2017 -- lecture
-\begin{itemize}
-\item Languages
-\item Grammars
-\end{itemize}
-\item Saturday, 4th of March 2017 -- lecture
-\begin{itemize}
-\item Parsing
-\item ANTLR
-\end{itemize}
-\item Saturday, 11th of March 2017 -- exercises
-\begin{itemize}
-\item Grammars and languages
-\item ANTLR
-\end{itemize}
-\item Saturday, 25th of March 2017 -- exercises
-\begin{itemize}
-\item ANTLR
-\end{itemize}
-\item Exam
-\end{enumerate}
+\begin{frame}[fragile]{Course information}
 
-\end{frame}
+\begin{block}{Plan}
+	\begin{enumerate}
+		\item Saturday, 25th of February 2017 -- lecture (introduction to grammars)
+		\item \textbf{Saturday, 4th of March 2017 -- lecture (grammars and ANTLR)}
+		\item Saturday, 11th of March 2017 -- exercises (grammars)
+		\item Saturday, 25th of March 2017 -- exercises (ANTLR)
+		\item Exam
+	\end{enumerate}
+\end{block}
 
-% --------------------------------------------------------------------- %
-\begin{frame}[fragile]{Additional informations}
 \begin{alertblock}{Any questions?}
-Ask by mail: \verb|kiepas@agh.edu.pl|
+	Ask by mail: \verb|kiepas@agh.edu.pl|
 \end{alertblock}
 
 \begin{alertblock}{Course web-page}
-\verb|http://home.agh.edu.pl/~kiepas| $\rightarrow$ \textbf{Teaching} $\rightarrow$ \textbf{Introduction to theory of languages (2017)}
+	\verb|http://home.agh.edu.pl/~kiepas| $\rightarrow$ \textbf{Teaching} $\rightarrow$ \textbf{Introduction to theory of languages (2017)}
 \end{alertblock}
+
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Outline}
 	\tableofcontents
 \end{frame}
@@ -107,6 +93,7 @@ Ask by mail: \verb|kiepas@agh.edu.pl|
 \subsection{Languages}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Introduction}
 
 \begin{block}{Linguistics}
@@ -132,6 +119,7 @@ Scientific study of languages. Involves analysis of language:
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Language types}
 \begin{enumerate}
 \item Natural languages
@@ -157,6 +145,7 @@ Scientific study of languages. Involves analysis of language:
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Description of natural languages}
 
 \begin{block}{A really small bit of history}
@@ -179,6 +168,7 @@ Scientific study of languages. Involves analysis of language:
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Description of natural languages}
 
 \begin{block}{What we know now?}
@@ -204,6 +194,7 @@ Scientific study of languages. Involves analysis of language:
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Description of formal languages}
 
 \begin{alertblock}{Result}
@@ -230,6 +221,7 @@ Description of natural languages help us describe an artificial (formal) ones
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Alphabet}
 
 \begin{block}{Alphabet}
@@ -250,8 +242,9 @@ A set $\Sigma$ of available symbols, the simplest elements in the language
 \caption{\label{fig:latin_archaic}Ancient Latin alphabet}
 \end{figure}
 
-% --------------------------------------------------------------------- %
 \end{frame}
+
+% --------------------------------------------------------------------- %
 
 \begin{frame}{Word (I)}
 \begin{block}{Word}
@@ -269,6 +262,7 @@ Special word $\epsilon$ with length $|\epsilon|=0$
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Word (II)}
 
 \begin{exampleblock}{Words examples}
@@ -297,6 +291,7 @@ Special word $\epsilon$ with length $|\epsilon|=0$
 \end{frame}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Language}
 	
 \begin{definition}{Formal language}
@@ -317,46 +312,36 @@ $L\subseteq\Sigma^{\ast}$ is a subset of all words built over an alphabet $\Sigm
 \end{exampleblock}
 \end{frame}
 
-\subsection{Grammar}
+\subsection{Grammars}
 
 % --------------------------------------------------------------------- %
+
 \begin{frame}{Grammar}
 
 \begin{block}{Grammar}
-\begin{itemize}
-\item Description of a language
-\item A recipe for composing elements into sentence
-\item Describes syntax of a language
-\end{itemize}
+	\begin{itemize}
+		\item Description of a language and its syntax
+		\item A recipe for composing elements of an alphabet into sentence
+	\end{itemize}
 \end{block}
 
 \begin{definition}{Grammar}
 is a system $G = (V_T, V_N, P, S)$ where:
-\begin{itemize}
-%\item $\Sigma$ -- alphabet (set of terminals)
-\item $V_T$ -- terminals (alphabet $\Sigma$)
-%\item $NT$ -- set of nonterminals
-\item $V_N$ -- nonterminals
-\item $P$ -- production rules
-\item $S$ -- start symbol, $S\in V_N$
-\end{itemize}
+	\begin{itemize}
+		\item \textbf{$V_T$ -- terminals (alphabet $\Sigma$)}
+		\item $V_N$ -- \textbf{nonterminals}
+		\item $V_N \cap V_T = \emptyset$
+		\item $V = V_N \cup V_T$ -- vocabulary
+		\item $P$ -- \textbf{production rules} ($P \subseteq V^{+} \times V^{\ast}$)
+		\item $V_N, V_T, P$ -- are finite, nonempty sets
+		\item $S$ -- \textbf{start symbol, $S\in V_N$}
+	\end{itemize}
 \end{definition}
 
 \end{frame}
 
 % --------------------------------------------------------------------- %
 \begin{frame}{Grammar and languages}
-
-	\begin{definition}{Grammar}
-		is a system $G = (V_T, V_N, P, S)$ where:
-		\begin{itemize}
-			\item $V_N, V_T, P$ -- are finite, nonempty sets
-			%\item $\Sigma$ -- usually nonempty (if empty we have an empty language)
-			\item $V_N \cap V_T = \emptyset$ -- are disjoint
-			\item $V = V_N \cup V_T$ -- vocabulary (terminals and nonterminals)
-			\item $P \subseteq V^{+} \times V^{\ast}$
-		\end{itemize}
-	\end{definition}
 	
 	\begin{block}{Derivation}
 		Let $\alpha, \beta \in V$, then we say that:
@@ -365,69 +350,81 @@ is a system $G = (V_T, V_N, P, S)$ where:
 			\item $\alpha_n$ \textbf{derives} from $\alpha_1$ (i.e. $\alpha_1 \xRightarrow{\ *\ }\alpha_n$) -- if there exists a sequence of direct derivations giving in the result $\alpha_n$ : $\alpha_1\xRightarrow{\ p_1\ }\alpha_2\xRightarrow{\ p_2\ }\alpha_3\xRightarrow{\ p_3\ }...\xRightarrow{\ p_n\ }\alpha_n$, where $\{p_i : 0\leq i\leq k \land p_i\in P\}$  
 		\end{itemize}
 	\end{block}
-
- \end{frame}
- 
- \begin{frame}{Derivations}
- 	
+	
  	\begin{block}{Grammars and languages}
  		\begin{itemize}
- 			\item Sentence generated by some $G$ is every $w\in \Sigma^{\ast}$ that for each exists derivation from $S$
- 			\item Language $L(G)$ is generated by $G$ and consists of the sentences derivate using grammar $G$
- 			\item Two grammars $G_1$ and $G_2$ have \textit{(weak) equivalence} if $L(G_1) = L(G_2)$
- 		\end{itemize}
- 	\end{block}
- 	
- \end{frame}
+ 			\item Sentence $w\in V_T^*$ is generated by grammar $G$ if $w$ \textbf{derives} from $S$ ($S \xRightarrow{*} w$)
+	 		\item We say grammar $G$ \textbf{generate} language $L(G)$ if it contains all sentences derived from $S$, in a result $L(G) = \{w\in V_T^*: \exists (S \xRightarrow{*} w)\}$
+	 		\item Two grammars $G_1$ and $G_2$ have \textit{(weak) equivalence} if $L(G_1) = L(G_2)$
+	 	\end{itemize}
+	 \end{block}
 
-% --------------------------------------------------------------------- %
-%\begin{frame}{Grammar example}
-%\begin{examples}{Digits separated by plus or minus signs}
-%\begin{eqnarray*}
-%\begin{aligned}
-%& list \rightarrow list + list \\
-%& list \rightarrow list - list \\
-%& list \rightarrow \ 0 \ | \ 1 \ | \ 2 \ | \ 3 \ | \ 4 \ | \ 5 \ | \ 6 \ | \ 7 \ | \ 8 \ | \ 9
-%\end{aligned}
-%\end{eqnarray*}
-%\end{examples}
-%\end{frame}
+\end{frame}
 
 % ---------------------------------------------------------------------%
+
+\begin{frame}{Grammar examples}
+	\begin{block}{Grammar}
+		Let $G = (V_N, V_T, P, S)$, where 
+		\begin{itemize}
+			\item $V_N = \{S\}$
+			\item $V_T = \{a,b\}$
+			\item $P = \{\textcolor{red}{S \rightarrow aS} \lor \textcolor{blue}{S \rightarrow Sa}, S \rightarrow b\}$
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Derivations}
+		$\textcolor{red}{S}\implies a\textcolor{red}{S}\implies aa\textcolor{red}{S} \implies aaa\textcolor{red}{S} \implies aaaa\textcolor{red}{S} \implies aaaaa\textcolor{red}{S} \implies ...$
+		\\ $\textcolor{blue}{S}\implies \textcolor{blue}{S}a\implies \textcolor{blue}{S}aa \implies \textcolor{blue}{S}aaa \implies \textcolor{blue}{S}aaaa \implies \textcolor{blue}{S}aaaaa \implies ...$
+	\end{block}
+	
+	\begin{block}{Language}
+		$L(G) = \{a^{n}b\}$, where $n \geq 0$
+	\end{block}
+	
+	\begin{exampleblock}{Example sentences}
+		$b, ab, aab, aaab, aaaab, aaaaab, aaaaaab, aaaaaaab, aaaaaaaab, ...$
+	\end{exampleblock}
+\end{frame}
+ 
+% ---------------------------------------------------------------------%
+
+\subsection{Hierarchy of grammars}
+
 \begin{frame}{Chomsky's hierarchy}
 
 \begin{block}{Hierarchy}
 \begin{itemize}
 \item Describe the grammar expressiveness
-\item Describe the grammar hardness
-\item Each type of grammar is more restrictive
-\item Tells us what ``mechanical procedure`` we need to use in order to:
-\begin{itemize}
-\item Accept language
-\item Generate language
-\end{itemize}
+\item \textbf{Observation}: regular language is also a context-free grammar etc. ($\text{Regular} \subseteq \text{Context-free} \subseteq \text{Context-sensitive} \subseteq \text{Unrestricted}$)
+\item The nested grammar is more restrictive than the enclosing one
+%\item Tells us what ``mechanical procedure`` we need to use in order to:
+%\begin{itemize}
+%\item Accept language
+%\item Generate language
+%\end{itemize}
 %\item $\alpha, \beta\in V^{*}$ -- any sequence of terminals and nonterminals
 %\item $\gamma\in V^{+}$ -- any nonempty sequence of terminals and nonterminals
 %\item $A, B\in NT$ -- nonterminals
 %\item $a, b\in \Sigma$ -- terminals
 \end{itemize}
 \end{block}
-\vskip -0.5cm
-\begin{table}\footnotesize
-\begin{tabular}{c|c|c|c}
-\textbf{Grammar} & \textbf{Language} & \textbf{Automaton} & \textbf{Production rules} \\
-\hline
-Type-0 & Recursively enumerable & Turing machine &  $\alpha \rightarrow \beta$ \\ %Turing machine 
-Type-1 & Context-sensitive & Linear bounded ND TM &$\alpha A\beta \rightarrow \alpha \gamma \beta$ \\ 
-Type-2 & Context-free & ND pushdown & $\alpha \rightarrow \gamma$ \\ 
-Type-3 & Regular & Finite state &$A\rightarrow a$ and $A\rightarrow aB$ 
-\end{tabular}
-\end{table}
 
-%\begin{figure}
-%\includegraphics[width=0.2\textwidth]{img/Chomsky-hierarchy.svg}
-%\caption{\label{fig:your-figure}Professor of Linguistics (Emeritus) at MIT, Cambridge}
-%\end{figure}
+%\begin{table}\footnotesize
+%\begin{tabular}{c|c|c|c}
+%\textbf{Grammar} & \textbf{Language} & \textbf{Automaton} \\% & \textbf{Production rules} \\
+%\hline
+%Type-0 & Recursively enumerable & Turing machine &  $\alpha \rightarrow \beta$ \\ %Turing machine 
+%Type-1 & Context-sensitive & Linear bounded Non-deterministic Turing Machine &$\alpha A\beta \rightarrow %\alpha \gamma \beta$ \\ 
+%Type-2 & Context-free & ND pushdown & $\alpha \rightarrow \gamma$ \\ 
+%Type-3 & Regular & Finite state &$A\rightarrow a$ and $A\rightarrow aB$ 
+%\end{tabular}
+%\end{table}
+
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{img/chomsky_hierarchy.png}
+\caption{\label{fig:chomsky_hierarchy}Chomsky's hierarchy}
+\end{figure}
 
 \end{frame}
 
@@ -438,7 +435,7 @@ For all production rules $\forall (\alpha \rightarrow \beta)\in P$ it is true:
 
 \begin{block}{First condition}
 	\begin{itemize}
-		\item $|\alpha| \leq |\beta|$ - they don't decrease length of a word
+		\item $|\alpha| \leq |\beta|$ - they don't decrease length of a word, where $\alpha, \beta\in V^*$
 	\end{itemize}
 
 \end{block}
@@ -462,10 +459,10 @@ For all production rules $\forall (\alpha \rightarrow \beta)\in P$ it is true:
 % TODO : put four slides for each type of grammar + limiting condition 
 
 % --------------------------------------------------------------------- %
-\begin{frame}{Type-0 : Unrestricted rewriting system}
+\begin{frame}{Type-0 : Recursively enumerable (unrestricted) grammar}
 	
 	\begin{block}{Description}
-		Type-0 grammar has no limitations (unrestricted)
+		Type-0 grammar has no limitations (is unrestricted)
 	\end{block}
 	
 	\begin{exampleblock}{Valid production rules}
@@ -665,39 +662,75 @@ For all production rules $\forall (\alpha \rightarrow \beta)\in P$ it is true:
 	
 \end{frame}
 
+% --------------------------------------------------------------------- %
+
 \begin{frame}{Normal forms}
 
-\end{frame}
+Let $A, B\in V_N$, $a\in V_T$ and $\beta\in {V_N}^*$, then:
 
-\begin{frame}{Derivation trees}
-	Also : tree diagrams, phrase markers. For regular and context-free grammars.
+\begin{block}{The Chomsky normal-form}
+	All productions of a grammar have the form of $A \rightarrow BC$ or $A \rightarrow a$
+\end{block}
+
+\begin{block}{The Greibach normal-form}
+	All productions of a grammar have the form $A \rightarrow a\beta$
+\end{block}
+
+\begin{theorem}
+	Any context-free language can be generated by a grammar in \textbf{Chomsky normal-form}
+\end{theorem}
+
+\begin{theorem}
+	Any context-free language can be generated by a grammar in \textbf{Greibach normal-form}
+\end{theorem}
+
 \end{frame}
 
 % --------------------------------------------------------------------- %
 
-\begin{frame}{Grammar examples}
-	\begin{block}{Grammar}
-		Let $G = (V_N, V_T, P, S)$, where 
-		\begin{itemize}
-			\item $V_N = \{S\}$
-			\item $V_T = \{a,b\}$
-			\item $P = \{\textcolor{red}{S \rightarrow aS} \lor \textcolor{blue}{S \rightarrow Sa}, S \rightarrow b\}$
-		\end{itemize}
-	\end{block}
-	
-	\begin{block}{Derivations}
-		$\textcolor{red}{S}\implies a\textcolor{red}{S}\implies aa\textcolor{red}{S} \implies aaa\textcolor{red}{S} \implies aaaa\textcolor{red}{S} \implies aaaaa\textcolor{red}{S} \implies ...$
-		\\ $\textcolor{blue}{S}\implies \textcolor{blue}{S}a\implies \textcolor{blue}{S}aa \implies \textcolor{blue}{S}aaa \implies \textcolor{blue}{S}aaaa \implies \textcolor{blue}{S}aaaaa \implies ...$
-	\end{block}
-	
-	\begin{block}{Language}
-		$L(G) = \{a^{n}b\}$, where $n \geq 0$
-	\end{block}
-	
-	\begin{exampleblock}{Example sentences}
-		$b, ab, aab, aaab, aaaab, aaaaab, aaaaaab, aaaaaaab, aaaaaaaab, ...$
-	\end{exampleblock}
+\begin{frame}{Normal forms}
+
+We saw that $L(G) = \{a^nb^n\}$, where $n\geq 1$ is a language created by a grammar $G$ with production rules:
+
+\begin{itemize}
+	\item $P = \{S\rightarrow aSB, S\rightarrow A, A \rightarrow ab, B\rightarrow b\}$
+\end{itemize}
+
+But there are other rules $P'$ from grammar $G'$ in a Chomsky normal-form that will give us the same language $L(G) = L(G')$:
+
+\begin{itemize}
+\item $P' = \{S \rightarrow CB, D \rightarrow SB, S \rightarrow CD, C \rightarrow a, B \rightarrow b\}$
+\end{itemize}
+
+\begin{block}{Derivation $a^3b^3$}
+	$\textcolor{red}{S}\implies \textcolor{red}{C}D \implies a\textcolor{red}{D} \implies a\textcolor{red}{S}B\implies a\textcolor{red}{C}Db \implies aa\textcolor{red}{D}b \implies aaS\textcolor{red}{B}b \implies aa\textcolor{red}{S}bb \implies aa\textcolor{red}{C}Bbb \implies aaa\textcolor{red}{B}bb \implies aaabbb$
+\end{block}
+
+And rules $P''$ from grammar $G''$ in a Greibach normal form:
+
+\begin{itemize}
+\item $P'' = \{S \rightarrow aD, D \rightarrow aDB, D \rightarrow aBB, B \rightarrow b\}$
+\end{itemize}
+
+\begin{block}{Derivation $a^3b^3$}
+	\footnotesize$\textcolor{red}{S}\implies a\textcolor{red}{D} \implies aa\textcolor{red}{D}B \implies aaa\textcolor{red}{B}BB \implies aaab\textcolor{red}{B}B \implies aaabb\textcolor{red}{B} \implies aaabb b $ 
+\end{block}
+
 \end{frame}
+
+% --------------------------------------------------------------------- %
+
+\begin{frame}{Derivation trees}
+\begin{figure}
+\includegraphics[width=\textwidth]{img/derivation_tree_2.png}
+\caption{\label{fig:derivation-trees}Derivations trees for word $a^3b^3$. \textbf{a.} derivation in grammar $G$, \textbf{b.} derivation in grammar $G'$ (Chomsky normal-form), \textbf{c.1} derivation in grammar $G''$ (Greibach normal-form) }
+\end{figure}
+
+\end{frame}
+
+% --------------------------------------------------------------------- %
+
+\subsection{Examples of grammars}
 
 \begin{frame}{Grammar example: \textit{mirror language}}
 	\begin{block}{Grammar}
@@ -771,15 +804,23 @@ For all production rules $\forall (\alpha \rightarrow \beta)\in P$ it is true:
 
 %\subsection{Notation}
 \begin{frame}{Language and grammar}
-Two common tasks:
+A few common tasks:
 
 % Zadania od Majewskiego
 
 \begin{itemize}
-	\item Check if language is legal (accepted by the grammar) -- trace all the applicable rules (derive it language from the start symbol) or... use corresponding automaton!
-	\item Generate language from grammar -- start from \textit{start symbol}, go through all applicable rules
+	\item Check language correctness
+	\item Generate language from grammar
+	\item Generate grammar for language
+	\item Classify grammar (according to the Chomsky hierarchy)
+	%\item Check if language is legal (accepted by the grammar) -- trace all the applicable rules (derive it language from the start symbol) or... use corresponding automaton!
+	%\item Generate language from grammar -- start from \textit{start symbol}, go through all applicable rules
 \end{itemize}
 \end{frame}
+
+\section{Practice}
+
+\subsection{Notations of grammar}
 
 % --------------------------------------------------------------------- %
 \begin{frame}[fragile]{Backus-Naur form (BNF)}
@@ -870,25 +911,49 @@ hannah
 %\begin{frame}{Extended Backus-Naur form (EBNF)}
 %\end{frame}
 
-\section{Parsing}
+\subsection{ANTLR}
 
-\subsection{Methods}
-
-\subsection{Tools}
-
-\section{ANTLR}
+\begin{frame}{Lexer vs parser}
+	
+	\begin{figure}
+		\includegraphics[width=\textwidth]{img/lexer_parser_scheme}
+		\vskip -1.2cm
+		\caption{\label{fig:your-figure}A scheme for lexical and semantic analysis\footnotemark}
+	\end{figure}
+	
+	
+	
+	\begin{itemize}
+		\item Lexical analysis converts a sequences of characters into a sequence of tokens (strings with meanings)
+		\item Semantic analysis matches a sequence of tokens into some language's construct
+	\end{itemize}
+	
+	%	\begin{block}{Parser}
+	%		Performs \textit{lexical analysis} which is classification of sequence of symbols into lexemes (tokens). Single characters are symbols for lexer. Lexer understand regular grammar (Chomsky's level 3).
+	%	\end{block}
+	
+	%	\begin{block}{Lexer}%
+	%		Tokens (terminal symbols with semantics) are symbols for the parser. Parser understands context-free grammar (Chomsky's level 2).
+	%	\end{block}
+	
+	\footnotetext[1]{\tiny From ANTLR4 on-line documentation}
+	
+\end{frame}
 
 % --------------------------------------------------------------------- %
 \begin{frame}{ANTLR v4}
 	
 \begin{block}{Parser generator}
-	content...
+Generate lexer and parser for given grammar.
 \end{block}	
 	
 \begin{block}{ANTLR}
 A parser generator which allows to:
 \begin{itemize}
-	\item 
+	\item Perform lexical analysis (lexer)
+	\item Perform semantic analysis (parser)
+	\item Code transformation
+	\item Perform code evaluation
 \end{itemize}
 \end{block}
 
@@ -907,18 +972,18 @@ A parser generator which allows to:
 		\begin{exampleblock}{Grammar structure}		
 			\footnotesize
 			\begin{lstlisting}
-				grammar ANY_NAME;
-				options {...}
-				import ... ;
-				tokens {...}
-				channels {...}
-				@actionName{...}
-				// lexer rules
-				LEXER_RULE1
-				LEXER_RULE2
-				// parser rules
-				parser_rule1
-				parser_rule2			
+grammar ANY_NAME;
+options {...}
+import ... ;
+tokens {...}
+channels {...}
+@actionName{...}
+// lexer rules
+LEXER_RULE1
+LEXER_RULE2
+// parser rules
+parser_rule1
+parser_rule2			
 			\end{lstlisting}
 		\end{exampleblock}
 	\end{minipage}
@@ -943,30 +1008,6 @@ A parser generator which allows to:
 
 \end{frame}
 
-\begin{frame}{Lexer vs parser}
-	
-\begin{figure}
-\includegraphics[width=\textwidth]{img/lexer_parser_scheme}
-\vskip -1.2cm
-\caption{\label{fig:your-figure}Caption goes here\footnotemark}
-\end{figure}
-	
-	
-	
-%	Lexical analysis converts a sequences of characters into a sequence of tokens (strings with meanings).
-	
-%	\begin{block}{Parser}
-%		Performs \textit{lexical analysis} which is classification of sequence of symbols into lexemes (tokens). Single characters are symbols for lexer. Lexer understand regular grammar (Chomsky's level 3).
-%	\end{block}
-	
-	\begin{block}{Lexer}
-		Tokens (terminal symbols with semantics) are symbols for the parser. Parser understands context-free grammar (Chomsky's level 2).
-	\end{block}
-
-\footnotetext[1]{\tiny From ANTLR4 on-line documentation}
-
-\end{frame}
-
 \begin{frame}{ANTLR syntax (II)}
 	\begin{table}[H]
 		\begin{tabular}{c|c}
@@ -984,24 +1025,11 @@ A parser generator which allows to:
 	\end{table}
 \end{frame}
 
-\begin{frame}[fragile]{ANTLR patterns}
-	\begin{table}[H]
-		\begin{tabular}{c|c}
-			\textbf{Pattern name} & \textbf{Examples} \\
-			\hline
-			Sequence & \verb|'[' INT+ ']'|\\
-			Sequence with terminator & \verb|(statement ';')*| \\
-			Sequence with separator & \verb|( expr (',' expr)*)?| \\
-			Choice & \verb^type : 'int' | 'float'^\\
-			Token dependency & \verb|ID '[' expr ']'| \\
-			Nested phrase & \verb^expr : '(' expr ')' | ID^
-		\end{tabular}
-	\end{table}
-\end{frame}
-
-\begin{frame}{Action and semantic predicate}
+%\begin{frame}{Action and semantic predicate}
 	
-\end{frame}
+%\end{frame}
+
+\subsection{ANTLR examples}
 
 \begin{frame}[fragile]{First grammar}
 	\begin{exampleblock}{Simple grammar (Hello.g4)}
@@ -1032,31 +1060,46 @@ r : 'hello' ID;
 			WS : [ \t\r\n]+ -> skip;
 		\end{verbatim}
 	\end{exampleblock}
-				// parser rules start with lowercase letters, lexer rules with uppercase
+%				// parser rules start with lowercase letters, lexer rules with uppercase
+\end{frame}
+
+
+\begin{frame}[fragile]{ANTLR patterns}
+	\begin{table}[H]
+		\begin{tabular}{c|c}
+			\textbf{Pattern name} & \textbf{Examples} \\
+			\hline
+			Sequence & \verb|'[' INT+ ']'|\\
+			Sequence with terminator & \verb|(statement ';')*| \\
+			Sequence with separator & \verb|( expr (',' expr)*)?| \\
+			Choice & \verb^type : 'int' | 'float'^\\
+			Token dependency & \verb|ID '[' expr ']'| \\
+			Nested phrase & \verb^expr : '(' expr ')' | ID^
+		\end{tabular}
+	\end{table}
 \end{frame}
 
 % TODO: use package listings
 \begin{frame}[fragile]{Parser tester}
 	\begin{exampleblock}{Parser}
 		\begin{lstlisting}[basicstyle=\tiny, language=Java]
-			import org.antlr.v4.runtime.*;
-			import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 			
-			public class Test { 
-			    public static void main(String[] args) throws Exception { 
-			        // create a CharStream that reads from standard input 
-			        ANTLRInputStream input = new ANTLRInputStream(System.in);
-			        // create a lexer that feeds off of input 
-			        CharStream ArrayInitLexer lexer = new ArrayInitLexer(input);
-			        // create a buffer of tokens pulled from the lexer 
-			        CommonTokenStream tokens = new CommonTokenStream(lexer);
-			        // create a parser that feeds off the tokens buffer 
-			        ArrayInitParser parser = new ArrayInitParser(tokens);
-			        ParseTree tree = parser.init();
-			        System.out.println(tree.toStringTree(parser));
-			    } 
-			}
-			
+public class Test { 
+    public static void main(String[] args) throws Exception { 
+        // create a CharStream that reads from standard input 
+        ANTLRInputStream input = new ANTLRInputStream(System.in);
+        // create a lexer that feeds off of input 
+        CharStream ArrayInitLexer lexer = new ArrayInitLexer(input);
+        // create a buffer of tokens pulled from the lexer 
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        // create a parser that feeds off the tokens buffer 
+        ArrayInitParser parser = new ArrayInitParser(tokens);
+        ParseTree tree = parser.init();
+        System.out.println(tree.toStringTree(parser));
+    } 
+}			
 		\end{lstlisting}
 	\end{exampleblock}
 \end{frame}
@@ -1084,32 +1127,32 @@ WS : [ \t]+ -> skip;
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Generated parser}
-	zawartość...
-\end{frame}
+%\begin{frame}{Generated parser}
+%	zawartość...
+%\end{frame}
 
-\begin{frame}{Generated lexer}
-	zawartość...
-\end{frame}
+%\begin{frame}{Generated lexer}%
+%	zawartość...
+%\end{frame}
 
-\begin{frame}{Generated tree visitor}
-	zawartość...
-\end{frame}
+%\begin{frame}{Generated tree visitor}%
+%	zawartość...
+%\end{frame}
 
-\begin{frame}{Generated tree listener}
-	zawartość...
-\end{frame}
+%\begin{frame}{Generated tree listener}
+%	zawartość...
+%\end{frame}
 
-\begin{frame}{Importing grammars}
-	show two files : lexer \& grammar
-\end{frame}
+%\begin{frame}{Importing grammars}
+%	show two files : lexer \& grammar
+%\end{frame}
 
-\begin{frame}{ANTLR caveats}
-	\begin{itemize}
-		\item Lexer/Parser rules order matter
-		\item 
-	\end{itemize}
-\end{frame}
+%\begin{frame}{ANTLR caveats}
+%	\begin{itemize}
+%		\item Lexer/Parser rules order matter
+%		\item 
+%	\end{itemize}
+%\end{frame}
 
 % Commands to include a figure:
 %\begin{figure}
