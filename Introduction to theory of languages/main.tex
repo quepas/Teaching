@@ -65,8 +65,8 @@
 \begin{block}{Plan}
 	\begin{enumerate}
 		\item Saturday, 25th of February 2017 -- lecture (introduction to grammars)
-		\item \textbf{Saturday, 4th of March 2017 -- lecture (grammars and ANTLR)}
-		\item Saturday, 11th of March 2017 -- exercises (grammars)
+		\item Saturday, 4th of March 2017 -- lecture (grammars and ANTLR)
+		\item \textbf{Saturday, 11th of March 2017 -- exercises (grammars)}
 		\item Saturday, 25th of March 2017 -- exercises (ANTLR)
 		\item Exam
 	\end{enumerate}
@@ -369,13 +369,13 @@ is a system $G = (V_T, V_N, P, S)$ where:
 		\begin{itemize}
 			\item $V_N = \{S\}$
 			\item $V_T = \{a,b\}$
-			\item $P = \{\textcolor{red}{S \rightarrow aS} \lor \textcolor{blue}{S \rightarrow Sa}, S \rightarrow b\}$
+			\item $P = \{\textcolor{red}{S \rightarrow aS}, S \rightarrow b\}$ % \lor \textcolor{blue}{S \rightarrow Sa}
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Derivations}
 		$\textcolor{red}{S}\implies a\textcolor{red}{S}\implies aa\textcolor{red}{S} \implies aaa\textcolor{red}{S} \implies aaaa\textcolor{red}{S} \implies aaaaa\textcolor{red}{S} \implies ...$
-		\\ $\textcolor{blue}{S}\implies \textcolor{blue}{S}a\implies \textcolor{blue}{S}aa \implies \textcolor{blue}{S}aaa \implies \textcolor{blue}{S}aaaa \implies \textcolor{blue}{S}aaaaa \implies ...$
+		%\\ $\textcolor{blue}{S}\implies \textcolor{blue}{S}a\implies \textcolor{blue}{S}aa \implies \textcolor{blue}{S}aaa \implies \textcolor{blue}{S}aaaa \implies \textcolor{blue}{S}aaaaa \implies ...$
 	\end{block}
 	
 	\begin{block}{Language}
